@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     if (historico.length > 0) {
       historicoTexto = "Histórico de propostas anteriores:\n";
       historico.forEach((h, i) => {
-        historicoTexto += Proposta ${i + 1}: ${h}\n;
+        historicoTexto += `Proposta ${i + 1}: ${h}\n`;
       });
       historicoTexto += "\n";
     }
@@ -41,11 +41,11 @@ ${job}
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization: Bearer ${process.env.OPENAI_API_KEY},
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model:model: "gpt-4", // GPT-4 completo "gpt-4",
+        model: "gpt-4o-mini", // estável e rápido na Vercel
         messages: [{ role: "user", content: prompt }],
         temperature: 0.4,
       }),
@@ -71,3 +71,4 @@ ${job}
     });
   }
 }
+
